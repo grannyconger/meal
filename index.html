@@ -1,1 +1,969 @@
- 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mother's Day Meal 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;1,500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f5f0e8;
+  --surface: #ede8dc;
+  --surface2: #e4ddd0;
+  --border: #c8bfaa;
+  --forest: #2d4a2d;
+  --navy: #1e2d45;
+  --burnt: #c17f24;
+  --orange: #c4541a;
+  --sage: #5a7a5a;
+  --text: #1e1a14;
+  --muted: #7a6f5e;
+  --done-text: #b8b0a0;
+  --white: #faf7f2;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Lora', Georgia, serif;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* TOP BAR */
+#topbar {
+  background: var(--forest);
+  padding: 0 20px;
+  flex-shrink: 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  z-index: 100;
+}
+#topbar-main {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 52px;
+}
+#topbar h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 17px;
+  font-weight: 600;
+  color: #e8dfc8;
+  white-space: nowrap;
+  font-style: italic;
+}
+#topbar-toggles {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: center;
+}
+.toggle-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 20px;
+  padding: 4px 11px 4px 7px;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  font-family: 'Lora', serif;
+  font-size: 12px;
+  color: #b8af98;
+  user-select: none;
+  white-space: nowrap;
+}
+.toggle-pill:hover { background: rgba(255,255,255,0.13); }
+.toggle-pill.active { background: rgba(255,255,255,0.16); border-color: rgba(255,255,255,0.32); color: #f0e8d0; }
+.pill-sw {
+  width: 26px; height: 15px;
+  background: #3a2d1e;
+  border-radius: 8px;
+  position: relative;
+  transition: background 0.2s;
+  flex-shrink: 0;
+}
+.pill-sw::after {
+  content: '';
+  position: absolute;
+  width: 11px; height: 11px;
+  background: #7a6a58;
+  border-radius: 50%;
+  top: 2px; left: 2px;
+  transition: left 0.2s, background 0.2s;
+}
+.toggle-pill.active .pill-sw { background: var(--burnt); }
+.toggle-pill.active .pill-sw::after { left: 13px; background: #fff; }
+
+/* WORKSPACE */
+#workspace {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+  min-height: 0;
+}
+
+/* LIST COLUMN */
+.list-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border);
+  overflow: hidden;
+  transition: flex 0.35s ease, opacity 0.28s ease;
+  min-width: 0;
+}
+.list-col:last-child { border-right: none; }
+.list-col.hidden { flex: 0 !important; opacity: 0; pointer-events: none; }
+
+/* LIST HEADER */
+.list-header {
+  padding: 11px 14px 9px;
+  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.list-header:hover { background: var(--surface2); }
+.list-header-left { flex: 1; min-width: 0; }
+.list-header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list-header-sub {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 2px;
+  font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.list-header-icon {
+  font-size: 16px;
+  color: var(--muted);
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition: opacity 0.15s;
+}
+.list-header:hover .list-header-icon { opacity: 1; }
+
+.col-0 .list-header { border-bottom-color: var(--burnt); }
+.col-0 .list-header-title { color: var(--burnt); }
+.col-1 .list-header { border-bottom-color: var(--forest); }
+.col-1 .list-header-title { color: var(--forest); }
+.col-2 .list-header { border-bottom-color: var(--navy); }
+.col-2 .list-header-title { color: var(--navy); }
+.col-3 .list-header { border-bottom-color: var(--sage); }
+.col-3 .list-header-title { color: var(--sage); }
+.col-4 .list-header { border-bottom-color: var(--orange); }
+.col-4 .list-header-title { color: var(--orange); }
+
+/* SCROLL WRAP — contains steps + completed */
+.steps-wrap {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.steps-wrap::-webkit-scrollbar { width: 4px; }
+.steps-wrap::-webkit-scrollbar-track { background: transparent; }
+.steps-wrap::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+/* pending steps grow to push completed to bottom */
+.pending-steps { flex: 1; }
+
+/* STEP ROW */
+.step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px 14px;
+  border-bottom: 1px solid var(--surface2);
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+}
+.step:hover { background: rgba(0,0,0,0.025); }
+
+/* checkbox LEFT */
+.step-check {
+  width: 20px; height: 20px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--white);
+  transition: all 0.18s;
+}
+.checkmark {
+  opacity: 0;
+  transform: scale(0.3) rotate(-15deg);
+  transition: opacity 0.22s, transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+}
+.step.done .checkmark { opacity: 1; transform: scale(1) rotate(0deg); }
+
+.col-0 .step.done .step-check { background: rgba(193,127,36,0.13); border-color: var(--burnt); }
+.col-1 .step.done .step-check { background: rgba(45,74,45,0.13); border-color: var(--forest); }
+.col-2 .step.done .step-check { background: rgba(30,45,69,0.13); border-color: var(--navy); }
+.col-3 .step.done .step-check { background: rgba(90,122,90,0.13); border-color: var(--sage); }
+.col-4 .step.done .step-check { background: rgba(196,84,26,0.13); border-color: var(--orange); }
+
+.col-0 .checkmark path { stroke: var(--burnt); }
+.col-1 .checkmark path { stroke: var(--forest); }
+.col-2 .checkmark path { stroke: var(--navy); }
+.col-3 .checkmark path { stroke: var(--sage); }
+.col-4 .checkmark path { stroke: var(--orange); }
+
+.step-num {
+  font-size: 11px;
+  color: var(--muted);
+  min-width: 20px;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+.step-body {
+  flex: 1;
+  font-size: 18px;
+  line-height: 1.65;
+  color: var(--text);
+}
+.step.done .step-body { color: var(--done-text); text-decoration: line-through; text-decoration-color: #c8bfaa; }
+.step.done .step-num { color: #c0b8a8; }
+
+/* tags */
+.tech-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-family: 'Lora', serif;
+  font-style: italic;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-right: 5px;
+  vertical-align: middle;
+  font-weight: 500;
+  border: 1px solid;
+}
+.col-0 .tech-tag { color: var(--burnt); border-color: var(--burnt); background: rgba(193,127,36,0.08); }
+.col-1 .tech-tag { color: var(--forest); border-color: var(--forest); background: rgba(45,74,45,0.08); }
+.col-2 .tech-tag { color: var(--navy); border-color: var(--navy); background: rgba(30,45,69,0.08); }
+.col-3 .tech-tag { color: var(--sage); border-color: var(--sage); background: rgba(90,122,90,0.08); }
+.col-4 .tech-tag { color: var(--orange); border-color: var(--orange); background: rgba(196,84,26,0.08); }
+
+.flag-tag {
+  display: inline-block;
+  font-size: 10px;
+  font-family: 'Lora', serif;
+  font-weight: 500;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  margin-right: 5px;
+  vertical-align: middle;
+  background: #f0e6cc;
+  color: #8a5c10;
+  border: 1px solid #d4b87a;
+}
+
+/* FLY ANIMATION */
+@keyframes flyDown {
+  0%   { transform: translateY(0) scale(1); opacity: 1; }
+  30%  { transform: translateY(-4px) scale(1.01); opacity: 0.9; }
+  100% { transform: translateY(52px) scale(0.96); opacity: 0; }
+}
+.step.flying { animation: flyDown 0.4s cubic-bezier(0.4,0,0.6,1) forwards; pointer-events: none; }
+
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  font-size: 13px;
+  animation: sparkleAnim 0.55s ease forwards;
+  z-index: 10;
+  color: var(--burnt);
+}
+@keyframes sparkleAnim {
+  0%   { transform: scale(0) translateY(0); opacity: 1; }
+  55%  { transform: scale(1.5) translateY(-14px); opacity: 1; }
+  100% { transform: scale(0.7) translateY(-22px); opacity: 0; }
+}
+
+/* COMPLETED SECTION — pinned at bottom of scroll */
+.completed-section {
+  border-top: 1px dashed var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+}
+.completed-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 8px 14px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-family: 'Lora', serif;
+  font-size: 13px;
+  color: var(--muted);
+  font-style: italic;
+  text-align: left;
+  transition: color 0.2s;
+}
+.completed-toggle:hover { color: var(--text); }
+.comp-arrow {
+  font-size: 9px;
+  display: inline-block;
+  transition: transform 0.22s;
+  font-style: normal;
+}
+.completed-toggle.open .comp-arrow { transform: rotate(180deg); }
+.completed-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.32s ease;
+}
+.completed-list.open { max-height: 600px; overflow-y: auto; }
+.completed-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 8px 14px;
+  border-top: 1px solid var(--surface2);
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--done-text);
+  text-decoration: line-through;
+  text-decoration-color: #c8bfaa;
+  line-height: 1.5;
+  transition: background 0.12s;
+}
+.completed-step:hover { background: rgba(0,0,0,0.025); color: var(--muted); }
+.completed-check {
+  width: 16px; height: 16px;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 1px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--surface2);
+  opacity: 0.6;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(18,13,7,0.7);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s;
+  backdrop-filter: blur(3px);
+}
+.modal-overlay.open { opacity: 1; pointer-events: all; }
+
+.modal-box {
+  background: var(--white);
+  border-radius: 4px;
+  width: min(95vw, 740px);
+  max-height: 86vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 28px 64px rgba(0,0,0,0.32);
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.26s cubic-bezier(0.34,1.3,0.64,1);
+  overflow: hidden;
+}
+.modal-overlay.open .modal-box { transform: translateY(0) scale(1); }
+
+.modal-header {
+  padding: 20px 24px 15px;
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 600;
+  font-style: italic;
+}
+.modal-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+  font-style: italic;
+}
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0 0 0 20px;
+  line-height: 1;
+  transition: color 0.15s;
+  flex-shrink: 0;
+}
+.modal-close:hover { color: var(--text); }
+
+.modal-body {
+  overflow-y: auto;
+  padding: 18px 24px 28px;
+}
+.modal-body::-webkit-scrollbar { width: 4px; }
+.modal-body::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+.modal-hint {
+  font-size: 12px;
+  color: var(--muted);
+  font-style: italic;
+  margin-bottom: 14px;
+}
+
+/* Ingredient table */
+.ing-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.ing-table th {
+  font-family: 'Playfair Display', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 8px 14px;
+  text-align: left;
+  border-bottom: 2px solid var(--border);
+  background: var(--surface);
+}
+.ing-table th.right { text-align: right; }
+
+.ing-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--surface2);
+  vertical-align: top;
+  line-height: 1.4;
+}
+.ing-table td.right {
+  text-align: right;
+  white-space: nowrap;
+  font-size: 15px;
+  color: var(--muted);
+}
+.ing-table tr:last-child td { border-bottom: none; }
+.ing-table tr:hover td { background: var(--surface); }
+
+.ing-name { font-size: 16px; font-weight: 500; color: var(--text); }
+.ing-note { font-size: 12px; font-style: italic; color: var(--muted); margin-top: 3px; }
+
+/* modal color accents */
+.mc-0 .modal-header { border-bottom-color: var(--burnt); }
+.mc-0 .modal-title { color: var(--burnt); }
+.mc-1 .modal-header { border-bottom-color: var(--forest); }
+.mc-1 .modal-title { color: var(--forest); }
+.mc-2 .modal-header { border-bottom-color: var(--navy); }
+.mc-2 .modal-title { color: var(--navy); }
+.mc-3 .modal-header { border-bottom-color: var(--sage); }
+.mc-3 .modal-title { color: var(--sage); }
+.mc-4 .modal-header { border-bottom-color: var(--orange); }
+.mc-4 .modal-title { color: var(--orange); }
+</style>
+</head>
+<body>
+
+<div id="topbar">
+  <div id="topbar-main">
+    <h1>Mother's Day Meal 2026</h1>
+    <div id="topbar-toggles"></div>
+  </div>
+</div>
+
+<div id="workspace"></div>
+
+<!-- INGREDIENT MODAL -->
+<div class="modal-overlay" id="modal" onclick="maybeCloseModal(event)">
+  <div class="modal-box" id="modal-box">
+    <div class="modal-header" id="modal-header">
+      <div>
+        <div class="modal-title" id="modal-title"></div>
+        <div class="modal-sub" id="modal-sub"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-hint">Tap × or press Esc to close. Click outside to dismiss.</p>
+      <table class="ing-table" id="modal-table">
+        <thead>
+          <tr>
+            <th>Ingredient</th>
+            <th class="right">Amount</th>
+            <th class="right">Grams</th>
+          </tr>
+        </thead>
+        <tbody id="modal-tbody"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── INGREDIENT DATA ──
+const INGREDIENTS = {
+  supplies: [
+    { name: 'Grill', note: 'gas or charcoal', amount: '1', grams: '—' },
+    { name: 'Large cutting board', note: 'raw chicken only — never cross with produce', amount: '1', grams: '—' },
+    { name: 'Second cutting board', note: 'produce only', amount: '1', grams: '—' },
+    { name: "Chef's knife", amount: '1', grams: '—' },
+    { name: 'Meat mallet or heavy skillet', amount: '1', grams: '—' },
+    { name: 'Kitchen twine + scissors', amount: '1 roll', grams: '—' },
+    { name: 'Gallon zip-lock bags', note: 'for pounding chicken', amount: '6–12', grams: '—' },
+    { name: 'Parchment paper', amount: '1 roll', grams: '—' },
+    { name: 'Mixing bowls', note: 'one per filling', amount: '2', grams: '—' },
+    { name: 'Offset spatula or spoon', amount: '1', grams: '—' },
+    { name: 'Sheet pan with wire rack', amount: '1', grams: '—' },
+    { name: 'Instant-read meat thermometer', amount: '1', grams: '—' },
+    { name: 'Tongs', amount: '1 pair', grams: '—' },
+    { name: 'Large serving platter', amount: '1', grams: '—' },
+    { name: 'Hard-sided cooler with ice', note: 'transport', amount: '1', grams: '—' },
+    { name: 'Small jar with lid', note: 'transporting balsamic', amount: '1', grams: '—' },
+    { name: 'Paper towels', amount: '1 roll', grams: '—' },
+    { name: 'Foil or plastic wrap', note: 'covering pans for transport', amount: 'as needed', grams: '—' },
+  ],
+  basil: [
+    { name: 'Boneless skinless chicken breasts', amount: '6 breasts', grams: '~1,360 g' },
+    { name: 'Goat cheese, softened', amount: '6 oz', grams: '170 g' },
+    { name: 'Fresh basil leaves', note: 'whole, flat — 2–3 per breast', amount: '~18 leaves', grams: '~8 g' },
+    { name: 'Sun-dried tomatoes, oil-packed', note: 'blotted dry, chopped fine', amount: '3 tbsp', grams: '~35 g' },
+    { name: 'Garlic cloves, minced', amount: '2 cloves', grams: '~6 g' },
+    { name: 'Lemons, zested', note: 'zest only', amount: '2 lemons', grams: '~4 g zest' },
+    { name: 'Olive oil', note: 'for brushing outside', amount: '2 tbsp', grams: '~27 g' },
+    { name: 'Kosher salt', amount: '1½ tsp', grams: '~9 g' },
+    { name: 'Black pepper', amount: '½ tsp', grams: '~1 g' },
+    { name: 'Kitchen twine', note: '3 loops per breast × 6 breasts', amount: '~54 in total', grams: '—' },
+  ],
+  pesto: [
+    { name: 'Boneless skinless chicken breasts', amount: '6 breasts', grams: '~1,360 g' },
+    { name: 'Goat cheese, softened', amount: '6 oz', grams: '170 g' },
+    { name: 'Basil pesto', note: 'store-bought or homemade', amount: '4 tbsp', grams: '~60 g' },
+    { name: 'Sun-dried tomatoes, oil-packed', note: 'blotted dry, chopped fine', amount: '3 tbsp', grams: '~35 g' },
+    { name: 'Olive oil', note: 'for brushing outside', amount: '2 tbsp', grams: '~27 g' },
+    { name: 'Kosher salt', amount: '1 tsp', grams: '~6 g' },
+    { name: 'Black pepper', amount: '½ tsp', grams: '~1 g' },
+    { name: 'Kitchen twine', note: '3 loops per breast × 6 breasts', amount: '~54 in total', grams: '—' },
+  ],
+  salad: [
+    { name: 'Cocktail tomatoes', note: 'halved, salted, drained 10 min', amount: '2 pints', grams: '~680 g' },
+    { name: 'English cucumbers', note: 'sliced ¼ inch rounds, unpeeled', amount: '3 cucumbers', grams: '~900 g' },
+    { name: 'Red onion', note: 'thin-sliced, macerated in vinegar', amount: '½ medium', grams: '~75 g' },
+    { name: 'Fresh mint leaves', note: 'torn by hand', amount: '¼ cup loose', grams: '~6 g' },
+    { name: 'Olive oil', note: 'for dressing', amount: '3 tbsp', grams: '~40 g' },
+    { name: 'Red wine vinegar', note: 'dressing + onion maceration', amount: '3 tbsp total', grams: '~45 g' },
+    { name: 'Kosher salt', amount: '¾ tsp', grams: '~5 g' },
+    { name: 'Black pepper', amount: 'to taste', grams: '~1 g' },
+  ],
+  sausage: [
+    { name: 'Italian sausage links, mild', amount: '12 links', grams: '~1,360 g' },
+    { name: 'Fresh mozzarella', note: 'sliced ¼ inch rounds, patted dry', amount: '16 oz', grams: '454 g' },
+    { name: 'Balsamic vinegar or glaze', note: 'drizzle on-site only — not during transport', amount: '3–4 tbsp', grams: '~50 g' },
+  ],
+};
+
+// ── STEP DATA ──
+const LISTS = [
+  {
+    id: 'supplies',
+    label: 'Supplies & Equipment',
+    subtitle: 'Pull everything before you start',
+    items: [
+      { text: 'Grill — gas or charcoal' },
+      { text: '<strong>Large cutting board</strong> — raw chicken only, never cross with produce' },
+      { text: 'Second cutting board — produce only' },
+      { text: "Chef's knife" },
+      { text: 'Meat mallet or heavy skillet' },
+      { text: 'Kitchen twine + scissors' },
+      { text: 'Gallon zip-lock bags (for pounding chicken)' },
+      { text: 'Parchment paper' },
+      { text: 'Two mixing bowls — one per filling' },
+      { text: 'Spoon or offset spatula for spreading filling' },
+      { text: 'Sheet pan with wire rack' },
+      { text: 'Instant-read meat thermometer' },
+      { text: 'Tongs' },
+      { text: 'Large serving platter' },
+      { text: 'Hard-sided cooler with ice (transport)' },
+      { text: 'Small jar with lid (balsamic transport)' },
+      { text: 'Paper towels' },
+      { text: 'Foil or plastic wrap (covering pans for transport)' },
+    ]
+  },
+  {
+    id: 'basil',
+    label: 'Basil Chicken',
+    subtitle: 'Goat cheese · Fresh basil · Sun-dried tomato',
+    items: [
+      { text: '<span class="flag-tag">Night Before</span> Salt both sides of all 12 breasts generously. Place on wire rack over sheet pan. Refrigerate uncovered. This is the <strong>dry brine</strong> — biggest ROI technique in this entire prep.', tech: true },
+      { text: '<span class="flag-tag">Day Of</span> Pull goat cheese 30 min before starting. Cold cheese tears. Room temp spreads clean.' },
+      { text: 'Set out at counter: goat cheese, sun-dried tomatoes, fresh basil, minced garlic, 2 lemons, mixing bowl, spoon. One trip.' },
+      { text: 'Zest both lemons directly into bowl. Add 2 cloves minced garlic.' },
+      { text: 'Blot sun-dried tomatoes dry with paper towel. Chop fine. Add to bowl.' },
+      { text: 'Add 6 oz goat cheese. Mix until fully combined. Filling should hold its shape, not be runny. Set aside.' },
+      { text: 'Move to chicken board. Pat all 6 breasts dry — dry surface = better sear.' },
+      { text: '<span class="tech-tag">Butterfly</span> Slice each breast horizontally, stopping ½ inch from opposite edge. Open flat like a book. Do not cut all the way through.', tech: true },
+      { text: '<span class="tech-tag">Pound</span> Place breast in zip-lock bag. Pound from center outward to even ¾ inch thickness. Uneven = overcooked edges before center hits 165°F.', tech: true },
+      { text: 'Lay 2–3 fresh basil leaves flat on one half. Spoon 2 heaping tbsp filling on top. Flatten slightly — do not mound or it will not close.' },
+      { text: 'Fold breast over. Press edge gently to seal.' },
+      { text: '<span class="tech-tag">Tie</span> Cut 3 pieces twine per breast, each 8 inches. Tie loops at even intervals like a small roast. Snug, not cutting into the meat.', tech: true },
+      { text: 'Place on wire rack. Brush outside with olive oil. Season with salt and pepper.' },
+      { text: 'Refrigerate uncovered until transport. Uncovered = dry surface = better grill marks.' },
+    ]
+  },
+  {
+    id: 'pesto',
+    label: 'Pesto Chicken',
+    subtitle: 'Goat cheese · Pesto · Sun-dried tomato',
+    items: [
+      { text: 'Set out: goat cheese, pesto, sun-dried tomatoes, mixing bowl. No lemon or garlic — pesto has both.' },
+      { text: 'Blot sun-dried tomatoes dry. Chop fine. Add to bowl.' },
+      { text: 'Add 6 oz goat cheese and 4 tbsp pesto. Mix until combined. Filling will be green.' },
+      { text: 'Move to chicken board. Pat 6 breasts dry.' },
+      { text: '<span class="tech-tag">Butterfly</span> Slice horizontally, stopping ½ inch from edge. Open flat.', tech: true },
+      { text: '<span class="tech-tag">Pound</span> Zip-lock bag. Pound from center outward to even ¾ inch.', tech: true },
+      { text: 'Spoon 2 heaping tbsp pesto filling onto one half. Flatten with spoon.' },
+      { text: '<span class="tech-tag">Tie</span> Fold closed. Tie 3 twine loops per breast, evenly spaced. Snug, not tight.', tech: true },
+      { text: 'Place on sheet pan, opposite side from basil version. <strong>Label with tape</strong> — they look identical.' },
+      { text: 'Brush outside with olive oil. Season with salt and pepper. Refrigerate uncovered.' },
+    ]
+  },
+  {
+    id: 'salad',
+    label: 'Tomato Cucumber Salad',
+    subtitle: 'Make 20+ min before serving',
+    items: [
+      { text: 'Set out: cucumbers, cocktail tomatoes, red onion, fresh mint, olive oil, red wine vinegar, salt, pepper.' },
+      { text: 'Halve cocktail tomatoes. Place in colander. Sprinkle pinch of salt. Let drain 10 min — prevents watery salad.' },
+      { text: '<span class="tech-tag">Macerate onion</span> Thin-slice red onion. Submerge in red wine vinegar 5–10 min. Removes harshness, adds flavor. Drain before adding.', tech: true },
+      { text: 'Slice cucumbers into ¼ inch rounds. No need to peel — English skin is thin.' },
+      { text: 'Tear fresh mint by hand. Do not chop — tearing keeps oils intact. <span class="flag-tag">Note</span> Confirm mint is in the house.' },
+      { text: 'Combine drained tomatoes, cucumbers, onion, and mint in large bowl.' },
+      { text: '<span class="tech-tag">Dressing</span> Whisk: 3 tbsp olive oil + 1½ tbsp red wine vinegar + ½ tsp salt + cracked pepper. Emulsify in small bowl first, then pour over.', tech: true },
+      { text: 'Toss gently. Taste. Bright and slightly acidic. Adjust if needed.' },
+      { text: 'Cover and refrigerate. <span class="flag-tag">At Serving</span> Toss again before plating — dressing settles to the bottom.' },
+    ]
+  },
+  {
+    id: 'sausage',
+    label: 'Sausage & Mozzarella',
+    subtitle: 'Grill at home · Cold transport · Balsamic on-site',
+    items: [
+      { text: 'Preheat grill or cast iron to medium. Not high — casing splits and you lose the juices.' },
+      { text: 'Grill links turning every 3–4 min. Total time roughly 12–15 min. Pull at 160°F internal.' },
+      { text: '<span class="tech-tag">Rest</span> Let sausage rest 5 min before slicing. Cutting early = juices run out onto the board.', tech: true },
+      { text: '<span class="tech-tag">Bias cut</span> Slice on a diagonal. More surface area, better presentation, more flavor exposed.', tech: true },
+      { text: 'Slice fresh mozzarella into ¼ inch rounds. Pat each slice dry — surface moisture dilutes the balsamic.' },
+      { text: '<span class="flag-tag">Transport</span> Pack sausage and mozzarella in separate containers. Keep in cooler.' },
+      { text: '<span class="flag-tag">At Serving</span> Arrange on platter. Drizzle balsamic over mozzarella on-site only. Pack balsamic in small jar.' },
+    ]
+  }
+];
+
+// ── STATE ──
+function loadState() {
+  try { return JSON.parse(localStorage.getItem('mdm2026') || '{}'); } catch { return {}; }
+}
+function saveState(s) {
+  try { localStorage.setItem('mdm2026', JSON.stringify(s)); } catch {} 
+}
+
+let state = loadState();
+LISTS.forEach(l => {
+  if (!state[l.id]) state[l.id] = { visible: true, done: [], completedOpen: false };
+  if (state[l.id].visible === undefined) state[l.id].visible = true;
+  if (!Array.isArray(state[l.id].done)) state[l.id].done = [];
+});
+saveState(state);
+
+// ── MODAL ──
+let modalOpen = false;
+
+function openModal(ci) {
+  const list = LISTS[ci];
+  const ings = INGREDIENTS[list.id] || [];
+  const overlay = document.getElementById('modal');
+  const box = document.getElementById('modal-box');
+  document.getElementById('modal-title').textContent = list.label;
+  document.getElementById('modal-sub').textContent = list.subtitle;
+  box.className = `modal-box mc-${ci}`;
+  const tbody = document.getElementById('modal-tbody');
+  tbody.innerHTML = '';
+  ings.forEach(ing => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>
+        <div class="ing-name">${ing.name}</div>
+        ${ing.note ? `<div class="ing-note">${ing.note}</div>` : ''}
+      </td>
+      <td class="right">${ing.amount}</td>
+      <td class="right">${ing.grams}</td>
+    `;
+    tbody.appendChild(tr);
+  });
+  overlay.classList.add('open');
+  modalOpen = true;
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  modalOpen = false;
+}
+
+function maybeCloseModal(e) {
+  if (e.target === document.getElementById('modal')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && modalOpen) closeModal(); });
+
+// ── BUILD UI ──
+function buildAll() {
+  buildToggles();
+  buildWorkspace();
+}
+
+function buildToggles() {
+  const container = document.getElementById('topbar-toggles');
+  container.innerHTML = '';
+  LISTS.forEach(list => {
+    const pill = document.createElement('div');
+    pill.className = 'toggle-pill' + (state[list.id].visible ? ' active' : '');
+    pill.dataset.id = list.id;
+    const shortLabel = list.label.split(' ')[0];
+    pill.innerHTML = `<div class="pill-sw"></div><span>${shortLabel}</span>`;
+    pill.addEventListener('click', () => {
+      state[list.id].visible = !state[list.id].visible;
+      saveState(state);
+      updateVisibility();
+      updateToggles();
+    });
+    container.appendChild(pill);
+  });
+}
+
+function updateToggles() {
+  document.querySelectorAll('.toggle-pill').forEach(pill => {
+    pill.classList.toggle('active', state[pill.dataset.id].visible);
+  });
+}
+
+function updateVisibility() {
+  LISTS.forEach(list => {
+    const col = document.querySelector(`.list-col[data-id="${list.id}"]`);
+    if (col) col.classList.toggle('hidden', !state[list.id].visible);
+  });
+}
+
+function buildWorkspace() {
+  const ws = document.getElementById('workspace');
+  ws.innerHTML = '';
+
+  LISTS.forEach((list, ci) => {
+    const col = document.createElement('div');
+    col.className = `list-col col-${ci}`;
+    col.dataset.id = list.id;
+    if (!state[list.id].visible) col.classList.add('hidden');
+
+    // Header — click opens modal
+    const hdr = document.createElement('div');
+    hdr.className = 'list-header';
+    hdr.innerHTML = `
+      <div class="list-header-left">
+        <div class="list-header-title">${list.label}</div>
+        <div class="list-header-sub">${list.subtitle}</div>
+      </div>
+      <span class="list-header-icon" title="View ingredients">⊕</span>
+    `;
+    hdr.addEventListener('click', () => openModal(ci));
+    col.appendChild(hdr);
+
+    // Scroll wrap
+    const wrap = document.createElement('div');
+    wrap.className = 'steps-wrap';
+
+    // Pending steps container (grows to push completed down)
+    const pending = document.createElement('div');
+    pending.className = 'pending-steps';
+
+    const doneSet = new Set(state[list.id].done);
+    list.items.forEach((item, idx) => {
+      if (!doneSet.has(idx)) {
+        pending.appendChild(buildStep(list, ci, idx, item));
+      }
+    });
+
+    wrap.appendChild(pending);
+
+    // Completed section at bottom of scroll wrap
+    wrap.appendChild(buildCompletedSection(list, ci));
+
+    col.appendChild(wrap);
+    ws.appendChild(col);
+  });
+}
+
+function buildStep(list, ci, realIdx, item) {
+  const step = document.createElement('div');
+  step.className = 'step';
+  step.dataset.idx = realIdx;
+
+  // checkbox LEFT
+  const chk = document.createElement('div');
+  chk.className = 'step-check';
+  chk.innerHTML = `<svg class="checkmark" width="11" height="9" viewBox="0 0 11 9" fill="none"><path d="M1 4.5L4 7.5L10 1" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+  const num = document.createElement('div');
+  num.className = 'step-num';
+  num.textContent = String(realIdx + 1).padStart(2, '0');
+
+  const body = document.createElement('div');
+  body.className = 'step-body';
+  body.innerHTML = item.text;
+
+  step.appendChild(chk);
+  step.appendChild(num);
+  step.appendChild(body);
+
+  step.addEventListener('click', () => handleCheck(list, ci, realIdx, step));
+  return step;
+}
+
+function handleCheck(list, ci, realIdx, stepEl) {
+  const doneSet = new Set(state[list.id].done);
+
+  if (!doneSet.has(realIdx)) {
+    // Sparkle
+    ['✦','✧','✦','·'].forEach((s, i) => {
+      const sp = document.createElement('span');
+      sp.className = 'sparkle';
+      sp.textContent = s;
+      sp.style.left = (30 + i * 16) + 'px';
+      sp.style.top = '10px';
+      sp.style.animationDelay = (i * 0.06) + 's';
+      stepEl.appendChild(sp);
+    });
+
+    stepEl.classList.add('done');
+    setTimeout(() => {
+      stepEl.classList.add('flying');
+      setTimeout(() => {
+        stepEl.remove();
+        state[list.id].done.push(realIdx);
+        saveState(state);
+        refreshCompleted(list, ci);
+      }, 400);
+    }, 270);
+
+  } else {
+    // Uncheck — move back to pending
+    state[list.id].done = state[list.id].done.filter(i => i !== realIdx);
+    saveState(state);
+
+    const col = document.querySelector(`.list-col[data-id="${list.id}"]`);
+    const pending = col.querySelector('.pending-steps');
+    const newStep = buildStep(list, ci, realIdx, list.items[realIdx]);
+
+    const allSteps = Array.from(pending.querySelectorAll('.step'));
+    const insertBefore = allSteps.find(s => parseInt(s.dataset.idx) > realIdx);
+    if (insertBefore) pending.insertBefore(newStep, insertBefore);
+    else pending.appendChild(newStep);
+
+    refreshCompleted(list, ci);
+  }
+}
+
+function buildCompletedSection(list, ci) {
+  const section = document.createElement('div');
+  section.className = 'completed-section';
+
+  const doneArr = state[list.id].done;
+  const isOpen = state[list.id].completedOpen;
+
+  const btn = document.createElement('button');
+  btn.className = 'completed-toggle' + (isOpen ? ' open' : '');
+  btn.innerHTML = `<span class="comp-arrow">▲</span><span class="comp-label">&nbsp;${doneArr.length} completed</span>`;
+
+  const listEl = document.createElement('div');
+  listEl.className = 'completed-list' + (isOpen ? ' open' : '');
+
+  doneArr.forEach(idx => listEl.appendChild(buildCompletedRow(list, ci, idx)));
+
+  btn.addEventListener('click', e => {
+    e.stopPropagation();
+    const open = !btn.classList.contains('open');
+    btn.classList.toggle('open', open);
+    listEl.classList.toggle('open', open);
+    state[list.id].completedOpen = open;
+    saveState(state);
+  });
+
+  section.appendChild(btn);
+  section.appendChild(listEl);
+  return section;
+}
+
+function buildCompletedRow(list, ci, idx) {
+  const item = list.items[idx];
+  const row = document.createElement('div');
+  row.className = 'completed-step';
+  row.dataset.idx = idx;
+
+  const chk = document.createElement('div');
+  chk.className = 'completed-check';
+  chk.innerHTML = `<svg width="9" height="7" viewBox="0 0 9 7" fill="none"><path d="M1 3.5L3.2 5.5L8 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/></svg>`;
+
+  const txt = document.createElement('div');
+  const temp = document.createElement('div');
+  temp.innerHTML = item.text;
+  txt.textContent = temp.textContent;
+
+  row.appendChild(chk);
+  row.appendChild(txt);
+  row.addEventListener('click', () => handleCheck(list, ci, idx, row));
+  return row;
+}
+
+function refreshCompleted(list, ci) {
+  const col = document.querySelector(`.list-col[data-id="${list.id}"]`);
+  if (!col) return;
+  const wrap = col.querySelector('.steps-wrap');
+  const old = wrap.querySelector('.completed-section');
+  const newSec = buildCompletedSection(list, ci);
+  if (old) wrap.replaceChild(newSec, old);
+  else wrap.appendChild(newSec);
+}
+
+buildAll();
+</script>
+</body>
+</html>
